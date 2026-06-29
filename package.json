@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "repository": "https://github.com/connect-group/frontend-technical-test",
+  "overrides": {
+    "css-loader": {
+      "postcss": "^8.4.0"
+    }
+  },
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
@@ -44,6 +49,7 @@
     "webpack-dev-server": "3.11.0"
   },
   "dependencies": {
+    "prop-types": "^15.8.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
