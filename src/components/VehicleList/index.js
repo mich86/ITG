@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import useData from './useData';
 import Modal from '../Modal';
+import VehicleCardSkeleton from '../VehicleCardSkeleton';
 import './style.scss';
+
+const SKELETON_COUNT = 4;
 
 export default function VehicleList() {
   const [loading, error, vehicles] = useData();
   const [selectedVehicle, setSelectedVehicle] = useState(null);
 
   if (loading) {
-    return <div role="status" data-testid="loading">Loading</div>;
+    return (
+      <ul className="vehicle-list" role="status" aria-label="Loading vehicles" data-testid="loading">
+        {Array.from({ length: SKELETON_COUNT }, (_, i) => (
+          <VehicleCardSkeleton key={i} />
+        ))}
+      </ul>
+    );
   }
 
   if (error) {
@@ -19,13 +28,17 @@ export default function VehicleList() {
     <>
       <h1 className="visually-hidden">Jaguar Vehicles</h1>
       <ul className="vehicle-list" aria-label="Available vehicles" data-testid="results">
-        {Array.isArray(vehicles) && vehicles.map((vehicle) => {
+        {Array.isArray(vehicles) && vehicles.map((vehicle, index) => {
           const image16x9 = vehicle.media.find((m) => m.url.includes('/16x9/'));
           const image1x1 = vehicle.media.find((m) => m.url.includes('/1x1/'));
           const headingId = `vehicle-name-${vehicle.id}`;
 
           return (
-            <li key={vehicle.id} className="vehicle-list__item">
+            <li
+              key={vehicle.id}
+              className="vehicle-list__item"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
               <article className="vehicle-card" aria-labelledby={headingId}>
                 <picture className="vehicle-card__image">
                   <source media="(min-width: 768px)" srcSet={image16x9 && image16x9.url} />
