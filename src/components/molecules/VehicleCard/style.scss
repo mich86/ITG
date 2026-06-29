@@ -1,52 +1,3 @@
-@keyframes fadeInUp {
-
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.vehicle-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  @media (min-width: 768px) {
-    background-color: #e0e0e0;
-    border: 1px solid #e0e0e0;
-    display: grid;
-    gap: 1px;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  &__item {
-    animation: fadeInUp .4s ease both;
-    border-bottom: 1px solid #e0e0e0;
-
-    &:first-child {
-      border-top: 1px solid #e0e0e0;
-    }
-
-    @media (min-width: 768px) {
-      background-color: #fff;
-      border: 0;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      animation: none;
-    }
-  }
-}
-
 .vehicle-card {
   align-items: stretch;
   display: flex;
@@ -65,13 +16,6 @@
 
     @media (min-width: 768px) {
       aspect-ratio: 16 / 9;
-      width: 100%;
-    }
-
-    img {
-      display: block;
-      height: 100%;
-      object-fit: cover;
       width: 100%;
     }
   }
@@ -122,10 +66,7 @@
   }
 
   &__read-more {
-    background: 0;
     border: 1px solid #333;
-    cursor: pointer;
-    font-family: inherit;
     font-size: .75rem;
     font-weight: 700;
     letter-spacing: .08em;

@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+import Button from '../../atoms/Button';
 import './style.scss';
 
 const FOCUSABLE_SELECTORS = [
@@ -9,6 +11,22 @@ const FOCUSABLE_SELECTORS = [
   'textarea:not([disabled])',
   '[tabindex]:not([tabindex="-1"])',
 ].join(', ');
+
+const vehicleShape = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  media: PropTypes.arrayOf(PropTypes.shape({ url: PropTypes.string.isRequired })).isRequired,
+  meta: PropTypes.shape({
+    bodystyles: PropTypes.arrayOf(PropTypes.string),
+    drivetrain: PropTypes.arrayOf(PropTypes.string),
+    passengers: PropTypes.number,
+    emissions: PropTypes.shape({
+      template: PropTypes.string,
+      value: PropTypes.number,
+    }),
+  }),
+});
 
 export default function Modal({ vehicle, onClose }) {
   const modalRef = useRef(null);
@@ -76,20 +94,22 @@ export default function Modal({ vehicle, onClose }) {
         className="modal"
         ref={modalRef}
       >
-        <button
-          type="button"
+        <Button
           className="modal__close"
           onClick={onClose}
           aria-label="Close"
         >
           Close &#x2715;
-        </button>
+        </Button>
 
         {image16x9 && (
           <img
             src={image16x9.url}
             alt={`Jaguar ${id.toUpperCase()}`}
             className="modal__image"
+            loading="lazy"
+            width="470"
+            height="246"
           />
         )}
 
@@ -131,3 +151,8 @@ export default function Modal({ vehicle, onClose }) {
     </>
   );
 }
+
+Modal.propTypes = {
+  vehicle: vehicleShape.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
