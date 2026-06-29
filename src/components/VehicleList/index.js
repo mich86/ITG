@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useData from './useData';
+import Modal from '../Modal';
 import './style.scss';
 
 export default function VehicleList() {
   const [loading, error, vehicles] = useData();
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
 
   if (loading) {
     return <div role="status" data-testid="loading">Loading</div>;
@@ -33,12 +35,26 @@ export default function VehicleList() {
                   <h2 id={headingId} className="vehicle-card__name">{vehicle.id.toUpperCase()}</h2>
                   <p className="vehicle-card__price">{`From ${vehicle.price}`}</p>
                   <p className="vehicle-card__description">{vehicle.description}</p>
+                  <button
+                    type="button"
+                    className="vehicle-card__read-more"
+                    onClick={() => setSelectedVehicle(vehicle)}
+                    aria-haspopup="dialog"
+                  >
+                    Read more
+                  </button>
                 </div>
               </article>
             </li>
           );
         })}
       </ul>
+      {selectedVehicle && (
+        <Modal
+          vehicle={selectedVehicle}
+          onClose={() => setSelectedVehicle(null)}
+        />
+      )}
     </>
   );
 }
