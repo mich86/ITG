@@ -5,7 +5,9 @@ import './global-styles.scss';
 
 ReactDOM.render(
   <React.StrictMode>
-    <VehicleList />
+    <main>
+      <VehicleList />
+    </main>
   </React.StrictMode>,
   document.querySelector('.root')
 );
