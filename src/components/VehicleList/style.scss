@@ -1,3 +1,105 @@
-.VehicleList {
-  width: 100%;
+.vehicle-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @media (min-width: 768px) {
+    background-color: #e0e0e0;
+    border: 1px solid #e0e0e0;
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &__item {
+    border-bottom: 1px solid #e0e0e0;
+
+    &:first-child {
+      border-top: 1px solid #e0e0e0;
+    }
+
+    @media (min-width: 768px) {
+      background-color: #fff;
+      border: 0;
+    }
+  }
+}
+
+.vehicle-card {
+  align-items: stretch;
+  display: flex;
+  height: 100%;
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__image {
+    display: block;
+    flex-shrink: 0;
+    overflow: hidden;
+    width: 35%;
+
+    @media (min-width: 768px) {
+      aspect-ratio: 16 / 9;
+      width: 100%;
+    }
+
+    img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    padding: 16px;
+
+    @media (min-width: 768px) {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 24px 20px;
+      text-align: center;
+    }
+  }
+
+  &__name {
+    display: inline-block;
+    font-size: .9375rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+
+    @media (min-width: 768px) {
+      align-self: center;
+      border-bottom: 1px solid #333;
+      border-top: 1px solid #333;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      padding-top: 12px;
+    }
+  }
+
+  &__price {
+    color: #555;
+    font-size: .875rem;
+    font-weight: 300;
+    margin: 0 0 8px;
+  }
+
+  &__description {
+    color: #666;
+    font-size: .875rem;
+    line-height: 1.5;
+    margin: 0;
+  }
 }
